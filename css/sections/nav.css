@@ -32,27 +32,16 @@
   gap: 0px;
   flex-shrink: 0;
 }
-.nav-logo__wordmark {
-  display: flex;
-  align-items: center;
-  line-height: 1;
-}
-.nav-logo__tagline {
-  font-family: var(--font-body);
-  font-size: 7px;
-  font-weight: 300;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--color-logo-green);
-  padding-left: 3px;
-  margin-top: -4px;
+/* Official logo file. Set the height only; width follows the logo's
+   own proportions (175:64) automatically. */
+.nav-logo__img {
+  display: block;
+  height: 52px;
+  width: auto;
 }
 
-/* On mobile, tagline goes white so it's visible over hero image */
 @media (max-width: 767px) {
-  .nav-logo__tagline {
-    color: rgba(var(--color-white-rgb), 0.80);
-  }
+  .nav-logo__img { height: 44px; }   /* mobile nav is 60px tall */
 }
 
 /* ---- CENTRE LINKS ---- */

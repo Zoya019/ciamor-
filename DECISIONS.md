@@ -16,7 +16,8 @@ Newest entries go at the top of each section. Status: ✅ agreed · ⏳ waiting 
    nav/hero use (headline 56px, subtext 15px, CTA 13px, nav 14px). New sections need *one* scale. Options:
    (a) keep the docx scale for new sections (they'll look bigger than the hero), or
    (b) add a second, hero-matched scale (e.g. 56 / 40 / 32 / 15 / 13) and use that. Recommendation: (b), because "match the hero" is the rule.
-5. **Announcement bar is empty** in the reference (just `&nbsp;`). Ported as-is. What should it say? (Or 🧾 for the client.)
+5. **Logo gold vs. star gold.** The official logo's gold is `#AA8124`; the `--color-star` token is `#C4933F`. Should the rating stars use the real brand gold?
+6. **Announcement bar is empty** in the reference (just `&nbsp;`). Ported as-is. What should it say? (Or 🧾 for the client.)
 
 ---
 
@@ -27,18 +28,26 @@ Newest entries go at the top of each section. Status: ✅ agreed · ⏳ waiting 
 | Repo is `Zoya019/ciamor-` (not `ciamor-website`) | Zoya created it. Trailing hyphen flagged and kept unless she renames it. |
 | Vanilla HTML/CSS/JS, one CSS file per section | Zoya can read and edit everything; sections can't break each other. |
 | `reference/ciamor-reference.html` is byte-identical to the original | It's the record of Zoya's design. Never edit it. |
-| Only **one** base64 image existed (hero photo), now `assets/images/hero-model.png` | The handoff expected several; the other images were all external URLs. |
+| Only **one** base64 image existed (hero photo) | The handoff expected several; the other images were all external URLs. |
+| Hero now uses `assets/images/hero-model.webp` (100 KB) instead of the extracted PNG (1.7 MB) | Zoya supplied the WebP. Same picture (avg. difference ≈1/255, invisible), 17× smaller. |
 | Split-door dosha section archived in `archive/dosha-split-door/` as a runnable standalone page | Portfolio piece. Verified the doors still open on scroll, no JS errors. |
 
 ### New tokens added during the port
 | Token | Value | Why |
 |---|---|---|
-| `--color-logo-green` | `#4A5E1A` | Logo tagline colour was hardcoded. |
+| `--color-brand-green` / `-gold` / `-ink` | `#516325` / `#AA8124` / `#41392E` | Colours of the official logo, for reference. (Replaced the stand-in `--color-logo-green`.) |
 | `--color-white-rgb` | `255, 255, 255` | For transparent whites (`rgba(var(--color-white-rgb), 0.12)`). A hex token can't take an alpha in plain CSS. |
 | `--color-text-primary-rgb` | `88, 63, 48` | Same, for the brown hairline borders. |
 | `--color-shade-rgb` | `20, 12, 6` | Near-black brown used by hero overlay, hotspot spotlight, mobile menu. |
 
 ---
+
+## Real assets swapped in ✅
+
+| Change | Why |
+|---|---|
+| Hand-rebuilt SVG logo + HTML tagline → **official `assets/images/logo.svg`** (as an `<img>`, 52px tall desktop / 44px mobile) | The real brand file. The stand-in depended on the font loading and had the wrong drop/sprout shapes. The official lockup includes the tagline, so the separate tagline text and its CSS were removed. On mobile it reads better than the old white tagline did. This is the one intentional visual change to the "final" nav. Before/after in `docs/screenshots/logo-before-after.png`. |
+| Cream hotspot image added: `assets/images/cream-smear.png` (858×858, transparent) | Was missing from the reference. Hotspot now works as designed. |
 
 ## Announcement bar + Navbar + Hero: ported ✅
 
@@ -52,7 +61,7 @@ Changes made during the port (none visible to a mouse user):
 - Logo SVG left as-is (hex colours inside SVG attributes). It's an asset, not section CSS.
 
 Known issues carried over from the reference (not fixed, because the hero is "final"):
-- The cream hotspot image `images/cream_smear.png` **doesn't exist**, so a broken-image icon + "Cream texture" alt text shows in both versions.
+- ~~The cream hotspot image doesn't exist~~ → fixed, Zoya supplied it.
 - Hotspot labels are "Feature One … Feature Five" placeholders.
 - The hotspot only works on hover, so keyboard and screen-reader users can't reach it. Fine for decoration, but if the five features matter they need to exist as real text somewhere.
 
@@ -145,7 +154,8 @@ Sources: [Splitbase](https://splitbase.com/blog/beauty-ecommerce-optimization) �
 | Verify "4.8 average · 2,300+ verified reviews" | Shop header | Needs a real source (review platform). |
 | Announcement bar copy | Top of page | Currently empty. |
 | Cream hotspot: 5 real feature labels | Hero | Currently "Feature One…Five". |
-| Official logo as a vector file | Nav | Current logo is a hand-rebuilt SVG that depends on the Cormorant font loading. |
+| ~~Official logo as a vector file~~ | Nav | ✅ Supplied. |
+| **Hero image is AI-generated (Gemini watermark)** | Hero | See "Images to replace". Decide: real photoshoot, or licensed AI image + disclosure. |
 | Product data (names, prices, ratings, images) | Shop | All placeholder. |
 
 ---
@@ -154,8 +164,8 @@ Sources: [Splitbase](https://splitbase.com/blog/beauty-ecommerce-optimization) �
 
 | Image | Where | Problem |
 |---|---|---|
-| `assets/images/hero-model.png` | Hero | Only **1376×768** and **1.7 MB PNG**, so it looks soft on large/retina screens and loads slowly. Need ≥2560px wide original; export as WebP/AVIF (~200–300 KB). Confirm licence. |
-| `images/cream_smear.png` → `assets/images/cream-smear.png` | Hero hotspot | **Missing.** Not included with the reference. Need the file from Zoya. |
+| `assets/images/hero-model.webp` | Hero | **AI-generated:** has Google Gemini's sparkle watermark in the bottom-right corner (mostly hidden by the hero's bottom fade, but it's there). Don't edit the mark out. For a skincare brand whose headline is "Skin that speaks for itself", an AI face is a real risk: ad regulators (e.g. UK ASA) treat retouched/generated skin in cosmetics ads as potentially misleading. Also still only **1376×768**, so soft on large screens. Needs a real photograph (≥2560px wide), or a client decision to use AI imagery with appropriate rights/disclosure. |
+| `assets/images/cream-smear.png` | Hero hotspot | Supplied by Zoya. Confirm source/licence (is it a stock image?). |
 | `i.pinimg.com/736x/44/56/b9/4456b9ee4f97e0d601fe777534a03640.jpg` | Dosha slide 1 (archived) | Pinterest hotlink: licensing + will break. |
 | `i.pinimg.com/1200x/b3/a7/de/b3a7de5e4cbe04eabf212acbf5bbc02e.jpg` | Dosha / Vata (archived) | Pinterest hotlink, tagged placeholder. |
 | `i.pinimg.com/1200x/d4/51/90/d45190e1ecfececb980773269ecd7648.jpg` | Dosha / Pitta (archived) | Pinterest hotlink. |

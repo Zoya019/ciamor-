@@ -21,7 +21,10 @@
      "-rgb" tokens hold just the R, G, B numbers so we can add
      transparency where needed:  rgba(var(--color-shade-rgb), 0.42)
      (A plain hex token can't be given an alpha that way in CSS.) */
-  --color-logo-green:     #4A5E1A;                    /* logo wordmark + tagline */
+  /* Official logo colours (from assets/images/logo.svg). Reference only: use the file itself for the logo. */
+  --color-brand-green:    #516325;
+  --color-brand-gold:     #AA8124;
+  --color-brand-ink:      #41392E;                    /* logo tagline */
   --color-white-rgb:      255, 255, 255;
   --color-text-primary-rgb: 88, 63, 48;               /* same as --color-text-primary */
   --color-shade-rgb:      20, 12, 6;                  /* near-black brown: overlays, mobile menu */
