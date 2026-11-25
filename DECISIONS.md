@@ -30,6 +30,8 @@ Newest entries go at the top of each section. Status: ✅ agreed · ⏳ waiting 
 | `reference/ciamor-reference.html` is byte-identical to the original | It's the record of Zoya's design. Never edit it. |
 | Only **one** base64 image existed (hero photo) | The handoff expected several; the other images were all external URLs. |
 | Hero now uses `assets/images/hero-model.webp` (100 KB) instead of the extracted PNG (1.7 MB) | Zoya supplied the WebP. Same picture (avg. difference ≈1/255, invisible), 17× smaller. |
+| Live preview on **Vercel** at https://ciamor.vercel.app, connected to GitHub (every push to `main` auto-deploys) | Chosen over GitHub Pages: preview link updates by itself after each section; no build step needed (preset "Other"). |
+| Claude's cloud session uses a personal "ciamor" environment that can reach only `ciamor.vercel.app` | So each deploy can be checked live after pushing, without widening network access for Zoya's other projects. |
 | Split-door dosha section archived in `archive/dosha-split-door/` as a runnable standalone page | Portfolio piece. Verified the doors still open on scroll, no JS errors. |
 
 ### New tokens added during the port
