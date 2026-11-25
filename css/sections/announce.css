@@ -1,0 +1,23 @@
+/* ==========================================================================
+   ANNOUNCEMENT BAR: ported from reference, unchanged
+   ========================================================================== */
+
+.announce-bar {
+  width: 100%;
+  background: var(--color-bg-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 24px;
+  border-bottom: 1px solid rgba(var(--color-text-primary-rgb), 0.12);
+}
+.announce-bar__icon {
+  width: 16px; height: 16px; flex-shrink: 0;
+}
+.announce-bar__text {
+  font-family: var(--font-body);
+  font-size: var(--fs-fine);
+  font-weight: 300;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.04em;
+}

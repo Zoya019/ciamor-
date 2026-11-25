@@ -1,0 +1,31 @@
+/* ==========================================================================
+   BASE: reset + global styles
+   Loaded after tokens.css and before any section file.
+   ========================================================================== */
+
+/* Simple reset: remove default spacing, make widths include padding/border */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  overflow-x: hidden;
+}
+
+/* Keyboard focus ring (added during port: the reference had none).
+   :focus-visible only shows for keyboard users, so mouse clicks
+   look exactly like the reference. */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Text only screen readers can hear (e.g. extra context on links) */
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

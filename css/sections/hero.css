@@ -1,0 +1,257 @@
+/* ==========================================================================
+   HERO + CREAM HOTSPOT: ported from reference, visually unchanged
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  background-color: var(--color-bg-primary);
+}
+
+/* Full-bleed photo. The mask fades the bottom 18% into the page colour. */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 38% center;
+  transform: scale(1.08);
+  transform-origin: center;
+  -webkit-mask-image: linear-gradient(to bottom, black 82%, transparent 100%);
+          mask-image: linear-gradient(to bottom, black 82%, transparent 100%);
+}
+
+/* Gradient overlay: left clear, right darkened for text legibility */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(var(--color-shade-rgb), 0) 15%,
+    rgba(var(--color-shade-rgb), 0.22) 45%,
+    rgba(var(--color-shade-rgb), 0.42) 100%
+  );
+  -webkit-mask-image: linear-gradient(to bottom, black 82%, transparent 100%);
+          mask-image: linear-gradient(to bottom, black 82%, transparent 100%);
+}
+
+.hero__blend {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent 40%, var(--color-bg-primary) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Text block, bottom-left */
+.hero__content {
+  position: absolute;
+  bottom: 10%;
+  left: 4%;
+  width: 50%;
+  max-width: 660px;
+  text-align: left;
+}
+
+.hero__headline {
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 500;
+  font-style: normal;
+  color: var(--color-white);
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+  margin-bottom: 6px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
+}
+
+.hero__subtext {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--color-white);
+  line-height: 1.55;
+  margin-bottom: 22px;
+  letter-spacing: 0.015em;
+}
+
+/* Primary CTA: solid brown, turns to outline on hover */
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  background: var(--color-accent);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  padding: 11px 20px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s;
+}
+.hero__cta:hover {
+  background: transparent;
+  border-color: var(--color-white);
+}
+/* The ↗ rotates to → on hover */
+.hero__cta-arrow {
+  font-size: 13px;
+  display: inline-block;
+  font-style: normal;
+  transition: transform 0.25s ease;
+}
+.hero__cta:hover .hero__cta-arrow { transform: rotate(45deg); }
+
+/* ---- TABLET ---- */
+@media (max-width: 1024px) {
+  .hero__content { width: 60%; left: 4%; bottom: 18%; }
+  .hero__headline { font-size: 46px; }
+}
+
+/* ---- MOBILE ---- */
+@media (max-width: 767px) {
+  .hero__bg { object-position: 35% center; }
+  .hero__overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.10) 0%,
+      rgba(var(--color-shade-rgb), 0.45) 50%,
+      rgba(var(--color-shade-rgb), 0.60) 100%
+    );
+  }
+  .hero__content { left: 5%; right: 5%; width: 90%; bottom: 12%; max-width: 100%; }
+  .hero__headline { font-size: 36px; line-height: 1.12; margin-bottom: 10px; }
+  .hero__subtext { font-size: 13px; margin-bottom: 20px; line-height: 1.6; }
+  .hero__cta { margin: 0; font-size: 12px; padding: 10px 18px; }
+}
+
+/* ---- SMALL MOBILE ---- */
+@media (max-width: 375px) {
+  .hero__headline { font-size: 30px; }
+  .hero__subtext  { font-size: 12px; }
+}
+
+
+/* ==========================================================================
+   CREAM SWATCH HOTSPOT
+   Hover the swatch → spotlight dims the page, 5 feature labels fade in.
+   ========================================================================== */
+.cream-hotspot {
+  position: absolute;
+  z-index: 5;
+  top: 30%;
+  left: 58%;
+  width: 140px;
+  height: 140px;
+}
+
+.cream-hotspot__swatch {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: relative;
+  z-index: 3;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: box-shadow 0.6s ease, transform 0.6s ease;
+}
+
+/* The "spotlight": a huge shadow darkens everything outside the swatch */
+.cream-hotspot:hover .cream-hotspot__swatch {
+  box-shadow: 0 0 0 2000px rgba(var(--color-shade-rgb), 0.55);
+  transform: scale(1.05);
+}
+
+/* ---- Feature callouts ---- */
+.cream-hotspot__feature {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  z-index: 4;
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.cream-hotspot__line {
+  display: block;
+  height: 1px;
+  width: 0;
+  background: var(--color-white);
+  transition: width 0.5s ease;
+}
+.cream-hotspot__label {
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  letter-spacing: 0.04em;
+  color: var(--color-white);
+  white-space: nowrap;
+}
+
+/* Reveal on hover, staggered so they don't all pop together */
+.cream-hotspot:hover .cream-hotspot__feature { opacity: 1; }
+.cream-hotspot:hover .cream-hotspot__feature .cream-hotspot__line { width: 40px; }
+
+.cream-hotspot__feature--1 { top: -60px; left: 50%; transform: translateX(-50%); transition-delay: 0.1s; }
+.cream-hotspot__feature--1 .cream-hotspot__line  { order: 2; }
+.cream-hotspot__feature--1 .cream-hotspot__label { order: 1; }
+.cream-hotspot__feature--2 { top: 10%; left: 140px; transition-delay: 0.2s; }
+.cream-hotspot__feature--3 { top: 45%; left: 140px; transition-delay: 0.3s; }
+.cream-hotspot__feature--4 { top: 80%; left: 140px; transition-delay: 0.4s; }
+.cream-hotspot__feature--5 {
+  bottom: -60px; left: 50%; transform: translateX(-50%);
+  flex-direction: column; transition-delay: 0.5s;
+}
+.cream-hotspot__feature--5 .cream-hotspot__line { height: 20px; width: 1px !important; }
+
+/* No hover on touch devices, so hide it (tap version: later, if wanted) */
+@media (max-width: 767px) {
+  .cream-hotspot { display: none; }
+}
+
+/* Subtle pulse rings: hint that the swatch is interactive */
+.cream-hotspot::before,
+.cream-hotspot::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid var(--color-white);
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 0.7;
+  z-index: 2;
+  pointer-events: none;
+  animation: hotspot-pulse 2.4s ease-out infinite;
+}
+.cream-hotspot::after { animation-delay: 1.2s; }
+
+@keyframes hotspot-pulse {
+  0%   { transform: translate(-50%, -50%) scale(1);   opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
+}
+
+/* Stop the pulse once they've engaged */
+.cream-hotspot:hover::before,
+.cream-hotspot:hover::after {
+  animation-play-state: paused;
+  opacity: 0;
+}
+
+/* Added during port: respect users who've asked for less motion */
+@media (prefers-reduced-motion: reduce) {
+  .cream-hotspot::before,
+  .cream-hotspot::after { animation: none; opacity: 0; }
+}

@@ -1,0 +1,44 @@
+/* ==========================================================================
+   DESIGN TOKENS: single source of truth
+   --------------------------------------------------------------------------
+   Every colour and font used on the site lives here. Section CSS files
+   should only ever reference these variables, never raw hex values.
+   Need a new one? Add it here AND log it in DECISIONS.md.
+   ========================================================================== */
+
+:root {
+  /* ---- Colours (from Typography_Rules.docx via the reference build) ---- */
+  --color-bg-primary:     #E6DFD6;                    /* warm beige page background */
+  --color-text-primary:   #583F30;                    /* deep brown */
+  --color-text-secondary: rgba(107, 76, 58, 0.72);
+  --color-accent:         #6B4C3A;
+  --color-white:          #FFFFFF;
+  --color-star:           #C4933F;                    /* rating stars, gold */
+  --color-overlay:        rgba(237, 232, 224, 0.88);
+
+  /* ---- Colours added during the port (see DECISIONS.md) ----
+     The reference had these as raw values inside components.
+     "-rgb" tokens hold just the R, G, B numbers so we can add
+     transparency where needed:  rgba(var(--color-shade-rgb), 0.42)
+     (A plain hex token can't be given an alpha that way in CSS.) */
+  --color-logo-green:     #4A5E1A;                    /* logo wordmark + tagline */
+  --color-white-rgb:      255, 255, 255;
+  --color-text-primary-rgb: 88, 63, 48;               /* same as --color-text-primary */
+  --color-shade-rgb:      20, 12, 6;                  /* near-black brown: overlays, mobile menu */
+
+  /* ---- Fonts ---- */
+  --font-display: 'Cormorant Garamond', serif;        /* headings, editorial */
+  --font-body:    'Poppins', sans-serif;              /* body, UI, CTAs */
+
+  /* ---- Type scale (from docx) ----
+     NOTE: the ported nav/hero don't actually use this scale (hero
+     headline is 56px, nav links 14px, CTA 13px). Open question
+     logged in DECISIONS.md. */
+  --fs-h1:       72px;   /* Primary section headings: Cormorant */
+  --fs-h2:       48px;   /* Secondary headings: Cormorant */
+  --fs-body-lg:  26px;   /* Large subtext: Poppins Medium */
+  --fs-body-cta: 24px;   /* CTA buttons: Poppins Regular */
+  --fs-body:     20px;   /* Body copy: Poppins Regular */
+  --fs-label:    14px;   /* Small labels, pills: Poppins Light */
+  --fs-fine:     12px;   /* Fine print, footer: Poppins Light */
+}
