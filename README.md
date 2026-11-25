@@ -11,6 +11,12 @@ Open `index.html` in a browser. That's it.
 (If something behaves oddly from `file://`, run a tiny local server from this folder:
 `python3 -m http.server` then visit http://localhost:8000.)
 
+## Live preview (Vercel)
+- **Live site:** _[add the public .vercel.app link here]_
+- **Dashboard (Zoya only):** https://vercel.com/zoya019s-projects/ciamor-
+- Every push to `main` redeploys automatically. No build step: Framework Preset is "Other" and Vercel serves the files as-is.
+- The original design is also live at `/reference/ciamor-reference.html`, and the archived split-door section at `/archive/dosha-split-door/`.
+
 ## Where things live
 ```
 index.html                 the page
